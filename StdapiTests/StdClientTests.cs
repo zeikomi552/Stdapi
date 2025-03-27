@@ -58,5 +58,20 @@ namespace Stdapi.Tests
 
             Assert.IsTrue(ret.Count > 0);
         }
+
+        [TestMethod()]
+        public async Task PostOptionsRequestTest()
+        {
+            StdClient client = new StdClient();
+
+            string stCurrentDir = System.IO.Directory.GetCurrentDirectory();
+            var ret = await client.PostOptionsRequest("http://127.0.0.1:7861", new Models.Post.PostOptions()
+            {
+                SdModelCheckpoint = "realisticVisionV60B1_v51HyperVAE.safetensors",
+                CLIPStopAtLastLayers = 2
+            });
+
+            Assert.IsTrue(ret.Equals("null"));
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Stdapi.Models;
 using Stdapi.Models.Get;
+using Stdapi.Models.Post;
 using Stdapi.Utilities;
 using System;
 using System.Collections.Generic;
@@ -99,6 +100,31 @@ namespace Stdapi
         #region POSTのリクエスト実行処理
         /// <summary>
         /// POSTのリクエスト実行処理
+        /// </summary>
+        /// <param name="uri">URI</param>
+        /// <param name="outdir">出力先ディレクトリ</param>
+        public async Task<string> PostOptionsRequest(string uri, PostOptions parameter)
+        {
+            StdPostResponseM tmp = new StdPostResponseM();
+            string request = string.Empty;
+
+            // エンドポイント + パラメータ
+            string url = uri + "/sdapi/v1/options";
+
+            StringContent payload = parameter.GetPayload();    // Payloadの取得
+            request = await tmp.RequestPost(url, payload);      // Requestの実行
+
+            // 実行してJSON形式をデシリアライズ
+            //var ret = JSONUtil.DeserializeFromText<StdPostResponseM>(request);
+
+            return request;
+        }
+        #endregion
+
+
+        #region Getのリクエスト実行処理
+        /// <summary>
+        /// Getのリクエスト実行処理
         /// </summary>
         /// <param name="uri">URI</param>
         /// <param name="outdir">出力先ディレクトリ</param>

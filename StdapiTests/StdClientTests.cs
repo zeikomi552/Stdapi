@@ -48,5 +48,15 @@ namespace Stdapi.Tests
 
         }
 
+        [TestMethod()]
+        public async Task SdModelsRequestTest()
+        {
+            StdClient client = new StdClient();
+
+            string stCurrentDir = System.IO.Directory.GetCurrentDirectory();
+            var ret = await client.SdModelsRequest("http://127.0.0.1:7861");
+
+            Assert.IsTrue(ret.Count > 0);
+        }
     }
 }
